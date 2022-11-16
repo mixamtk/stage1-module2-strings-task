@@ -13,6 +13,11 @@ public class StringSplitter {
      * @return List of substrings
      */
     public List<String> splitByDelimiters(String source, Collection<String> delimiters) {
-        throw new UnsupportedOperationException("You should implement this method.");
+        String replacement = " ";
+        ArrayList<String> list = new ArrayList<>();
+        for (String delimiter : delimiters) {
+            source = source.replaceAll(delimiter,replacement);
+            }
+        return List.of(source.split(replacement));
     }
 }
