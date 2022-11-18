@@ -29,34 +29,28 @@ public class MethodParser {
         int indEndMethodName = signatureString.indexOf(headArg);
         int indAccessMod = 0;
         int indReturnType = 1;
-        
         // parse head method
         String headMethod = signatureString.substring(indstartStr,indEndMethodName);
         String[] arrHeadMethod = headMethod.split(delimiter);
-        String accessModifier = arrHeadMethod[indAccessMod];
-        String returnType = arrHeadMethod[indReturnType];
+        String returnType;
+        String accessModifier;
+        if (arrHeadMethod.length == 2) {
+            indReturnType = 0;
+            accessModifier = null;
+            returnType = arrHeadMethod[indReturnType];
+        }
+        else {
+            returnType = arrHeadMethod[indReturnType];
+            accessModifier = arrHeadMethod[indAccessMod];
+        }
         String methodName = arrHeadMethod[arrHeadMethod.length - 1];
-        
         // parse arguments
         String strArgumentsMethod = signatureString.substring(indEndMethodName,signatureString.length()-1);
         List<MethodSignature.Argument> arguments = parseArguments(strArgumentsMethod);
-        
         // create object
         MethodSignature methodSignature = new MethodSignature(methodName,arguments);
         methodSignature.setAccessModifier(accessModifier);
         methodSignature.setReturnType(returnType);
         return methodSignature;
-    }
-
-    public List<MethodSignature.Argument> parseArguments (String strArguments) {
-        String delimiterMethod = ",";
-        String delimiter = " ";
-        List<MethodSignature.Argument> arguments = new ArrayList<>();
-        String[] arrStrArg = strArguments.split(delimiterMethod);
-        for (String value:arrStrArg) {
-            String[] partArg = value.split(delimiter);
-            arguments.add(new MethodSignature.Argument(partArg[0],partArg[1]));
-        }
-        return arguments;
     }
 }
