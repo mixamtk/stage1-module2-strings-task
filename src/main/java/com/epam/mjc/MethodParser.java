@@ -1,8 +1,6 @@
 package com.epam.mjc;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 public class MethodParser {
@@ -29,8 +27,8 @@ public class MethodParser {
         String headArg = "(";
         int indstartStr = 0;
         int indEndMethodName = signatureString.indexOf(headArg);
-        int indAccessMod = 1;
-        int indReturnType = 2;
+        int indAccessMod = 0;
+        int indReturnType = 1;
         
         // parse head method
         String headMethod = signatureString.substring(indstartStr,indEndMethodName);
