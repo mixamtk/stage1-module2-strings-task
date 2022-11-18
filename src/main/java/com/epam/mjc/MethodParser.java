@@ -52,5 +52,18 @@ public class MethodParser {
         methodSignature.setAccessModifier(accessModifier);
         methodSignature.setReturnType(returnType);
         return methodSignature;
+
+    }
+
+    public List<MethodSignature.Argument> parseArguments (String strArguments) {
+        String delimiterMethod = ",";
+        String delimiter = " ";
+        List<MethodSignature.Argument> arguments = new ArrayList<>();
+        String[] arrStrArg = strArguments.split(delimiterMethod);
+        for (String value:arrStrArg) {
+            String[] partArg = value.trim().split(delimiter);
+            arguments.add(new MethodSignature.Argument(partArg[0],partArg[1]));
+        }
+        return arguments;
     }
 }
