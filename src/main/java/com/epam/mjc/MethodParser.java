@@ -20,6 +20,40 @@ public class MethodParser {
      * @return {@link MethodSignature} object filled with parsed values from source string
      */
     public MethodSignature parseFunction(String signatureString) {
-        throw new UnsupportedOperationException("You should implement this method.");
+        String delimiter = " ";
+        String headArg = "(";
+        int indstartStr = 0;
+        int indEndMethodName = signatureString.indexOf(headArg);
+        int indAccessMod = 1;
+        int indReturnType = 2;
+        
+        // parse head method
+        String headMethod = signatureString.substring(indstartStr,indEndMethodName);
+        String[] arrHeadMethod = headMethod.split(delimiter);
+        String accessModifier = arrHeadMethod[indAccessMod];
+        String returnType = arrHeadMethod[indReturnType];
+        String methodName = arrHeadMethod[arrHeadMethod.length - 1];
+        
+        // parse arguments
+        String strArgumentsMethod = signatureString.substring(indEndMethodName,signatureString.length()-1);
+        List<MethodSignature.Argument> arguments = parseArguments(strArgumentsMethod);
+        
+        // create object
+        MethodSignature methodSignature = new MethodSignature(methodName,arguments);
+        methodSignature.setAccessModifier(accessModifier);
+        methodSignature.setReturnType(returnType);
+        return methodSignature;
+    }
+
+    public List<MethodSignature.Argument> parseArguments (String strArguments) {
+        String delimiterMethod = ",";
+        String delimiter = " ";
+        List<MethodSignature.Argument> arguments = new ArrayList<>();
+        String[] arrStrArg = strArguments.split(delimiterMethod);
+        for (String value:arrStrArg) {
+            String[] partArg = value.split(delimiter);
+            arguments.add(new MethodSignature.Argument(partArg[0],partArg[1]));
+        }
+        return arguments;
     }
 }
