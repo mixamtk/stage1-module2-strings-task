@@ -16,7 +16,6 @@ public class StringSplitter {
      */
     public List<String> splitByDelimiters(String source, Collection<String> delimiters) {
         String replacement = " ";
-        ArrayList<String> list = new ArrayList<>();
         for (String delimiter : delimiters) {
             source = source.replaceAll(delimiter,replacement);
             }
