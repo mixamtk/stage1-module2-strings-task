@@ -33,10 +33,9 @@ public class MethodParser {
         String headMethod = signatureString.substring(indstartStr,indEndMethodName);
         String[] arrHeadMethod = headMethod.split(delimiter);
         String returnType;
-        String accessModifier;
+        String accessModifier = null;
         if (arrHeadMethod.length == 2) {
             indReturnType = 0;
-            accessModifier = "";
             returnType = arrHeadMethod[indReturnType];
         }
         else {
