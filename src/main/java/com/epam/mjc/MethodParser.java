@@ -36,7 +36,7 @@ public class MethodParser {
         String accessModifier;
         if (arrHeadMethod.length == 2) {
             indReturnType = 0;
-            accessModifier = null;
+            accessModifier = "";
             returnType = arrHeadMethod[indReturnType];
         }
         else {
@@ -45,14 +45,14 @@ public class MethodParser {
         }
         String methodName = arrHeadMethod[arrHeadMethod.length - 1];
         // parse arguments
-        String strArgumentsMethod = signatureString.substring(indEndMethodName,signatureString.length()-1);
-        List<MethodSignature.Argument> arguments = parseArguments(strArgumentsMethod);
+        String strArgumentsMethod = signatureString.substring(indEndMethodName + 1,signatureString.length() - 1);
+        List<MethodSignature.Argument> arguments = new ArrayList<>();
+        if (strArgumentsMethod.trim().length() != 0) arguments = parseArguments(strArgumentsMethod);
         // create object
         MethodSignature methodSignature = new MethodSignature(methodName,arguments);
         methodSignature.setAccessModifier(accessModifier);
         methodSignature.setReturnType(returnType);
         return methodSignature;
-
     }
 
     public List<MethodSignature.Argument> parseArguments (String strArguments) {
